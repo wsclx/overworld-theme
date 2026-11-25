@@ -1,0 +1,374 @@
+# Overworld: a pixel-art theme for Home Assistant with dark and light mode in one theme.
+#
+# Dashboards sit in a little pixel landscape: a banded night sky with dithered steps, stars, a moon with a dithered
+# halo, hills, pine trees and houses with lit windows (dark), or a sun, clouds and green hills (light). Cards are
+# windows with stepped pixel corners and a hard pixel shadow. One art pixel is 2 CSS pixels everywhere.
+#
+# Works without any add-on: colours, the landscape, square corners and the window frames come from plain theme
+# variables. With card-mod 4.x (optional) the frames get stepped corners and a pixel shadow, switched-on tiles get a
+# dithered fill and a pixel cursor, and tiles with the class overworld-blocks show block bars.
+# With the companion module Overworld Pixels (optional, wsclx/overworld-pixels) icons are redrawn as pixel art and all
+# text uses the embedded pixel font; this theme switches the module on with `overworld-pixels: "on"`.
+# Without the module the theme falls back to the system monospace font. Nothing is downloaded from the internet.
+Overworld:
+  card-mod-theme: Overworld
+
+  # Switches on the Overworld Pixels module (if installed): pixel icons, pixel font, art pixel size in CSS pixels
+  overworld-pixels: "on"
+  overworld-pixel-size: "2"
+  # Theme-own variables, used below and by the card-mod rules
+  overworld-frame-image: >-
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='7' viewBox='0 0 7 7' shape-rendering='crispEdges'%3E%3Cpath fill='%2305081a' d='M2 0h3v1h-3zM1 1h1v1h-1zM5 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM1 5h1v1h-1zM5 5h1v1h-1zM2 6h3v1h-3z'/%3E%3Cpath fill='%23ece3c4' d='M2 1h3v1h-3zM1 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM5 3h1v1h-1zM1 4h1v1h-1zM5 4h1v1h-1zM2 5h3v1h-3z'/%3E%3C/svg%3E")
+  overworld-shadow: "drop-shadow(3px 3px 0 rgba(0,0,0,.6))"
+  overworld-dither: "rgba(255,212,71,.22)"
+  overworld-line: "#ece3c4"
+  overworld-window: "#131b3e"
+  overworld-page: "#0b1230"
+  overworld-cursor: "#f1ecdc"
+
+  # Core colours: night navy, a cream frame, a bright pixel blue for actions
+  primary-color: "#5aaeff"
+  accent-color: "#5aaeff"
+  text-primary-color: "#0b1230"
+  text-accent-color: "#0b1230"
+  primary-text-color: "#f1ecdc"
+  secondary-text-color: "#aab3d8"
+  disabled-text-color: "#7880a8"
+  disabled-color: "#4b5585"
+  divider-color: "#2c3870"
+  # Newer frontends colour buttons, switches and tabs from these scales instead of primary-color
+  ha-color-primary-05: "#04112e"
+  ha-color-primary-10: "#08204f"
+  ha-color-primary-20: "#0f3577"
+  ha-color-primary-30: "#164a9e"
+  ha-color-primary-40: "#1d5bd6"
+  ha-color-primary-50: "#3a84f5"
+  ha-color-primary-60: "#5aaeff"
+  ha-color-primary-70: "#86c2ff"
+  ha-color-primary-80: "#b2d6ff"
+  ha-color-primary-90: "#d8eaff"
+  ha-color-primary-95: "#ecf4ff"
+  # Neutral scale tinted towards navy, so settings and dialogs keep the same night colour
+  ha-color-neutral-05: "#0d1330"
+  ha-color-neutral-10: "#161d3d"
+  ha-color-neutral-20: "#262f55"
+  ha-color-neutral-30: "#384270"
+  ha-color-neutral-40: "#4b5585"
+  ha-color-neutral-50: "#66709c"
+  ha-color-neutral-60: "#8790b6"
+  ha-color-neutral-70: "#a4accc"
+  ha-color-neutral-80: "#c3c9e0"
+  ha-color-neutral-90: "#e0e4f0"
+  ha-color-neutral-95: "#f0f2f8"
+
+  # Backgrounds: the pixel landscape behind dashboards (hills band, moon, stars, four sky bands with dithered steps,
+  # all inline SVG drawn on a 1-unit grid and scaled by 2), plain navy for settings and editors
+  primary-background-color: "#0e1534"
+  secondary-background-color: "#141c40"
+  lovelace-background: >-
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='48' viewBox='0 0 160 48' shape-rendering='crispEdges'%3E%3Cpath fill='%23111a3c' d='M55 9h1v1h-1zM57 9h1v1h-1zM59 9h1v1h-1zM54 10h1v1h-1zM56 10h1v1h-1zM58 10h1v1h-1zM60 10h1v1h-1zM53 11h1v1h-1zM55 11h5v1h-5zM61 11h1v1h-1zM63 11h1v1h-1zM147 11h1v1h-1zM149 11h1v1h-1zM151 11h1v1h-1zM50 12h1v1h-1zM52 12h11v1h-11zM64 12h1v1h-1zM144 12h1v1h-1zM146 12h1v1h-1zM148 12h1v1h-1zM150 12h1v1h-1zM152 12h1v1h-1zM154 12h1v1h-1zM49 13h1v1h-1zM51 13h13v1h-13zM65 13h1v1h-1zM141 13h1v1h-1zM143 13h1v1h-1zM145 13h9v1h-9zM155 13h1v1h-1zM48 14h1v1h-1zM50 14h15v1h-15zM66 14h1v1h-1zM122 14h1v1h-1zM124 14h1v1h-1zM126 14h1v1h-1zM128 14h1v1h-1zM140 14h1v1h-1zM142 14h13v1h-13zM156 14h1v1h-1zM47 15h1v1h-1zM49 15h17v1h-17zM67 15h1v1h-1zM119 15h1v1h-1zM121 15h1v1h-1zM123 15h1v1h-1zM125 15h1v1h-1zM127 15h1v1h-1zM129 15h1v1h-1zM131 15h1v1h-1zM133 15h1v1h-1zM135 15h1v1h-1zM137 15h1v1h-1zM139 15h1v1h-1zM141 15h15v1h-15zM157 15h1v1h-1zM46 16h1v1h-1zM48 16h21v1h-21zM70 16h1v1h-1zM118 16h1v1h-1zM120 16h11v1h-11zM132 16h1v1h-1zM134 16h1v1h-1zM136 16h1v1h-1zM138 16h19v1h-19zM158 16h1v1h-1zM45 17h1v1h-1zM47 17h23v1h-23zM71 17h1v1h-1zM83 17h1v1h-1zM117 17h1v1h-1zM119 17h39v1h-39zM159 17h1v1h-1zM0 18h1v1h-1zM44 18h1v1h-1zM46 18h25v1h-25zM72 18h1v1h-1zM74 18h1v1h-1zM76 18h1v1h-1zM78 18h1v1h-1zM80 18h1v1h-1zM82 18h1v1h-1zM84 18h1v1h-1zM86 18h1v1h-1zM88 18h1v1h-1zM116 18h1v1h-1zM118 18h41v1h-41zM1 19h1v1h-1zM43 19h1v1h-1zM45 19h29v1h-29zM75 19h1v1h-1zM77 19h1v1h-1zM79 19h1v1h-1zM81 19h1v1h-1zM83 19h3v1h-3zM87 19h1v1h-1zM89 19h1v1h-1zM115 19h45v1h-45zM0 20h1v1h-1zM2 20h1v1h-1zM24 20h1v1h-1zM26 20h1v1h-1zM28 20h1v1h-1zM42 20h1v1h-1zM44 20h45v1h-45zM90 20h1v1h-1zM92 20h1v1h-1zM114 20h46v1h-46zM0 21h2v1h-2zM3 21h1v1h-1zM21 21h1v1h-1zM23 21h1v1h-1zM25 21h1v1h-1zM27 21h1v1h-1zM29 21h1v1h-1zM31 21h1v1h-1zM33 21h1v1h-1zM39 21h1v1h-1zM41 21h1v1h-1zM43 21h49v1h-49zM93 21h1v1h-1zM113 21h47v1h-47zM0 22h3v1h-3zM4 22h1v1h-1zM20 22h1v1h-1zM22 22h1v1h-1zM24 22h5v1h-5zM30 22h1v1h-1zM32 22h1v1h-1zM34 22h1v1h-1zM36 22h1v1h-1zM38 22h1v1h-1zM40 22h53v1h-53zM94 22h1v1h-1zM112 22h48v1h-48zM0 23h4v1h-4zM5 23h1v1h-1zM17 23h1v1h-1zM19 23h1v1h-1zM21 23h13v1h-13zM35 23h1v1h-1zM37 23h57v1h-57zM95 23h1v1h-1zM111 23h49v1h-49zM0 24h5v1h-5zM6 24h1v1h-1zM8 24h1v1h-1zM14 24h1v1h-1zM16 24h1v1h-1zM18 24h77v1h-77zM96 24h1v1h-1zM110 24h50v1h-50zM0 25h8v1h-8zM9 25h1v1h-1zM11 25h1v1h-1zM13 25h1v1h-1zM15 25h83v1h-83zM99 25h1v1h-1zM107 25h1v1h-1zM109 25h51v1h-51zM0 26h9v1h-9zM10 26h1v1h-1zM12 26h1v1h-1zM14 26h85v1h-85zM100 26h1v1h-1zM102 26h1v1h-1zM104 26h1v1h-1zM106 26h1v1h-1zM108 26h52v1h-52zM0 27h100v1h-100zM101 27h1v1h-1zM103 27h1v1h-1zM105 27h1v1h-1zM107 27h53v1h-53zM0 28h103v1h-103zM104 28h56v1h-56zM0 29h160v1h-160zM0 30h160v1h-160zM0 31h160v1h-160zM0 32h160v1h-160zM0 33h160v1h-160zM0 34h160v1h-160zM0 35h160v1h-160zM0 36h160v1h-160zM0 37h160v1h-160zM0 38h160v1h-160zM0 39h160v1h-160zM0 40h160v1h-160zM0 41h160v1h-160zM0 42h160v1h-160zM0 43h160v1h-160zM0 44h160v1h-160zM0 45h160v1h-160zM0 46h160v1h-160zM0 47h160v1h-160z'/%3E%3Cpath fill='%230a1029' d='M85 23h1v1h-1zM82 24h1v1h-1zM84 24h1v1h-1zM86 24h1v1h-1zM88 24h1v1h-1zM132 24h1v1h-1zM134 24h1v1h-1zM35 25h1v1h-1zM37 25h1v1h-1zM39 25h1v1h-1zM81 25h1v1h-1zM83 25h5v1h-5zM89 25h1v1h-1zM131 25h1v1h-1zM133 25h1v1h-1zM135 25h1v1h-1zM137 25h1v1h-1zM32 26h1v1h-1zM34 26h1v1h-1zM36 26h1v1h-1zM38 26h1v1h-1zM40 26h1v1h-1zM42 26h1v1h-1zM80 26h1v1h-1zM82 26h9v1h-9zM130 26h1v1h-1zM132 26h5v1h-5zM138 26h1v1h-1zM19 27h1v1h-1zM21 27h1v1h-1zM23 27h1v1h-1zM25 27h1v1h-1zM29 27h1v1h-1zM31 27h1v1h-1zM33 27h1v1h-1zM35 27h7v1h-7zM43 27h1v1h-1zM79 27h1v1h-1zM81 27h11v1h-11zM129 27h9v1h-9zM139 27h1v1h-1zM141 27h1v1h-1zM16 28h1v1h-1zM18 28h1v1h-1zM20 28h1v1h-1zM22 28h1v1h-1zM24 28h1v1h-1zM26 28h1v1h-1zM28 28h1v1h-1zM30 28h1v1h-1zM32 28h11v1h-11zM44 28h1v1h-1zM78 28h1v1h-1zM80 28h13v1h-13zM128 28h13v1h-13zM142 28h1v1h-1zM144 28h1v1h-1zM146 28h1v1h-1zM148 28h1v1h-1zM150 28h1v1h-1zM152 28h1v1h-1zM154 28h1v1h-1zM15 29h1v1h-1zM17 29h9v1h-9zM27 29h1v1h-1zM29 29h15v1h-15zM45 29h1v1h-1zM77 29h1v1h-1zM79 29h15v1h-15zM95 29h1v1h-1zM127 29h15v1h-15zM143 29h1v1h-1zM145 29h1v1h-1zM147 29h1v1h-1zM149 29h1v1h-1zM151 29h1v1h-1zM153 29h1v1h-1zM155 29h1v1h-1zM14 30h1v1h-1zM16 30h29v1h-29zM46 30h1v1h-1zM64 30h1v1h-1zM66 30h1v1h-1zM74 30h1v1h-1zM76 30h19v1h-19zM96 30h1v1h-1zM126 30h29v1h-29zM156 30h1v1h-1zM13 31h1v1h-1zM15 31h31v1h-31zM47 31h1v1h-1zM61 31h1v1h-1zM63 31h1v1h-1zM65 31h1v1h-1zM67 31h1v1h-1zM69 31h1v1h-1zM71 31h1v1h-1zM73 31h1v1h-1zM75 31h21v1h-21zM97 31h1v1h-1zM99 31h1v1h-1zM103 31h1v1h-1zM105 31h1v1h-1zM107 31h1v1h-1zM109 31h1v1h-1zM123 31h1v1h-1zM125 31h33v1h-33zM12 32h1v1h-1zM14 32h33v1h-33zM48 32h1v1h-1zM60 32h1v1h-1zM62 32h1v1h-1zM64 32h5v1h-5zM70 32h1v1h-1zM72 32h25v1h-25zM98 32h1v1h-1zM100 32h1v1h-1zM102 32h1v1h-1zM104 32h1v1h-1zM106 32h1v1h-1zM108 32h1v1h-1zM110 32h1v1h-1zM112 32h1v1h-1zM122 32h1v1h-1zM124 32h35v1h-35zM1 33h1v1h-1zM11 33h1v1h-1zM13 33h35v1h-35zM49 33h1v1h-1zM57 33h1v1h-1zM59 33h1v1h-1zM61 33h39v1h-39zM101 33h11v1h-11zM113 33h1v1h-1zM115 33h1v1h-1zM121 33h1v1h-1zM123 33h37v1h-37zM0 34h1v1h-1zM2 34h1v1h-1zM10 34h39v1h-39zM50 34h1v1h-1zM52 34h1v1h-1zM54 34h1v1h-1zM56 34h1v1h-1zM58 34h55v1h-55zM114 34h1v1h-1zM116 34h1v1h-1zM118 34h1v1h-1zM120 34h1v1h-1zM122 34h38v1h-38zM0 35h2v1h-2zM3 35h1v1h-1zM5 35h1v1h-1zM7 35h1v1h-1zM9 35h43v1h-43zM53 35h1v1h-1zM55 35h1v1h-1zM57 35h59v1h-59zM117 35h1v1h-1zM119 35h41v1h-41zM0 36h3v1h-3zM4 36h1v1h-1zM6 36h1v1h-1zM8 36h152v1h-152zM0 37h160v1h-160zM0 38h160v1h-160zM0 39h160v1h-160zM0 40h160v1h-160zM0 41h160v1h-160zM0 42h160v1h-160zM0 43h160v1h-160zM0 44h160v1h-160zM0 45h160v1h-160zM0 46h160v1h-160zM0 47h160v1h-160z'/%3E%3Cpath fill='%23060a1c' d='M37 19h1v1h-1zM142 19h4v1h-4zM152 19h1v1h-1zM37 20h1v1h-1zM142 20h4v1h-4zM152 20h1v1h-1zM20 21h1v1h-1zM36 21h3v1h-3zM142 21h4v1h-4zM152 21h1v1h-1zM20 22h1v1h-1zM36 22h3v1h-3zM141 22h6v1h-6zM151 22h3v1h-3zM19 23h3v1h-3zM35 23h5v1h-5zM125 23h1v1h-1zM141 23h6v1h-6zM151 23h3v1h-3zM155 23h1v1h-1zM19 24h3v1h-3zM35 24h5v1h-5zM105 24h1v1h-1zM125 24h1v1h-1zM141 24h6v1h-6zM151 24h3v1h-3zM155 24h1v1h-1zM18 25h5v1h-5zM53 25h1v1h-1zM64 25h1v1h-1zM70 25h1v1h-1zM105 25h1v1h-1zM125 25h1v1h-1zM140 25h8v1h-8zM150 25h7v1h-7zM18 26h5v1h-5zM53 26h1v1h-1zM63 26h2v1h-2zM70 26h1v1h-1zM98 26h1v1h-1zM105 26h1v1h-1zM124 26h3v1h-3zM140 26h8v1h-8zM150 26h7v1h-7zM53 27h1v1h-1zM63 27h3v1h-3zM69 27h3v1h-3zM98 27h1v1h-1zM104 27h3v1h-3zM124 27h3v1h-3zM140 27h8v1h-8zM150 27h8v1h-8zM52 28h3v1h-3zM62 28h4v1h-4zM69 28h3v1h-3zM97 28h3v1h-3zM104 28h3v1h-3zM123 28h5v1h-5zM153 28h5v1h-5zM7 29h1v1h-1zM52 29h3v1h-3zM62 29h5v1h-5zM68 29h5v1h-5zM97 29h3v1h-3zM103 29h5v1h-5zM123 29h5v1h-5zM7 30h1v1h-1zM52 30h3v1h-3zM61 30h5v1h-5zM68 30h5v1h-5zM96 30h5v1h-5zM103 30h5v1h-5zM122 30h5v1h-5zM6 31h3v1h-3zM51 31h5v1h-5zM6 32h3v1h-3zM51 32h5v1h-5zM5 33h5v1h-5zM51 33h5v1h-5zM5 34h5v1h-5z'/%3E%3Cpath fill='%230d1431' d='M53 3h12v1h-12zM53 4h12v1h-12zM53 5h12v1h-12zM53 6h12v1h-12zM53 7h12v1h-12zM53 8h12v1h-12zM53 9h12v1h-12zM53 10h12v1h-12zM53 11h12v1h-12z'/%3E%3Cpath fill='%231b2147' d='M55 -1h8v1h-8zM54 0h10v1h-10zM53 1h12v1h-12zM52 2h14v1h-14z'/%3E%3Cpath fill='%23ffb347' d='M55 5h2v1h-2zM58 5h2v1h-2zM62 5h2v1h-2zM55 6h2v1h-2zM58 6h2v1h-2zM62 6h2v1h-2zM126 18h1v1h-1zM66 20h1v1h-1zM77 24h1v1h-1zM93 24h1v1h-1zM9 29h1v1h-1z'/%3E%3C/svg%3E") left bottom / 320px 96px repeat-x fixed, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' shape-rendering='crispEdges'%3E%3Cpath fill='%23f3ecd2' d='M14 10h4v1h-4zM12 11h8v1h-8zM11 12h10v1h-10zM11 13h10v1h-10zM10 14h12v1h-12zM10 15h12v1h-12zM10 16h12v1h-12zM10 17h12v1h-12zM11 18h10v1h-10zM11 19h10v1h-10zM12 20h8v1h-8zM14 21h4v1h-4z'/%3E%3Cpath fill='%23d9cfa8' d='M13 9h6v1h-6zM12 10h2v1h-2zM18 10h2v1h-2zM11 11h1v1h-1zM20 11h1v1h-1zM10 12h1v1h-1zM21 12h1v1h-1zM9 13h2v1h-2zM21 13h2v1h-2zM9 14h1v1h-1zM22 14h1v1h-1zM9 15h1v1h-1zM22 15h1v1h-1zM9 16h1v1h-1zM22 16h1v1h-1zM9 17h1v1h-1zM22 17h1v1h-1zM9 18h2v1h-2zM21 18h2v1h-2zM10 19h1v1h-1zM21 19h1v1h-1zM11 20h1v1h-1zM20 20h1v1h-1zM12 21h2v1h-2zM18 21h2v1h-2zM13 22h6v1h-6z'/%3E%3Cpath fill='%23a79f80' d='M10 2h1v1h-1zM12 2h1v1h-1zM14 2h1v1h-1zM16 2h1v1h-1zM18 2h1v1h-1zM20 2h1v1h-1zM8 4h1v1h-1zM10 4h1v1h-1zM12 4h1v1h-1zM14 4h1v1h-1zM16 4h1v1h-1zM18 4h1v1h-1zM20 4h1v1h-1zM22 4h1v1h-1zM24 4h1v1h-1zM13 5h1v1h-1zM15 5h1v1h-1zM17 5h1v1h-1zM19 5h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM24 6h1v1h-1zM26 6h1v1h-1zM9 7h1v1h-1zM11 7h1v1h-1zM13 7h1v1h-1zM15 7h1v1h-1zM17 7h1v1h-1zM19 7h1v1h-1zM21 7h1v1h-1zM4 8h1v1h-1zM6 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM12 8h1v1h-1zM14 8h1v1h-1zM16 8h1v1h-1zM18 8h1v1h-1zM20 8h1v1h-1zM22 8h1v1h-1zM24 8h1v1h-1zM26 8h1v1h-1zM28 8h1v1h-1zM7 9h1v1h-1zM9 9h1v1h-1zM11 9h1v1h-1zM19 9h1v1h-1zM21 9h1v1h-1zM23 9h1v1h-1zM2 10h1v1h-1zM4 10h1v1h-1zM6 10h1v1h-1zM8 10h1v1h-1zM10 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM26 10h1v1h-1zM28 10h1v1h-1zM7 11h1v1h-1zM9 11h1v1h-1zM21 11h1v1h-1zM23 11h1v1h-1zM25 11h1v1h-1zM2 12h1v1h-1zM4 12h1v1h-1zM6 12h1v1h-1zM8 12h1v1h-1zM22 12h1v1h-1zM24 12h1v1h-1zM26 12h1v1h-1zM28 12h1v1h-1zM5 13h1v1h-1zM7 13h1v1h-1zM23 13h1v1h-1zM25 13h1v1h-1zM2 14h1v1h-1zM4 14h1v1h-1zM6 14h1v1h-1zM8 14h1v1h-1zM24 14h1v1h-1zM26 14h1v1h-1zM28 14h1v1h-1zM30 14h1v1h-1zM5 15h1v1h-1zM7 15h1v1h-1zM23 15h1v1h-1zM25 15h1v1h-1zM2 16h1v1h-1zM4 16h1v1h-1zM6 16h1v1h-1zM8 16h1v1h-1zM24 16h1v1h-1zM26 16h1v1h-1zM28 16h1v1h-1zM30 16h1v1h-1zM5 17h1v1h-1zM7 17h1v1h-1zM23 17h1v1h-1zM25 17h1v1h-1zM2 18h1v1h-1zM4 18h1v1h-1zM6 18h1v1h-1zM8 18h1v1h-1zM24 18h1v1h-1zM26 18h1v1h-1zM28 18h1v1h-1zM30 18h1v1h-1zM5 19h1v1h-1zM7 19h1v1h-1zM9 19h1v1h-1zM23 19h1v1h-1zM25 19h1v1h-1zM2 20h1v1h-1zM4 20h1v1h-1zM6 20h1v1h-1zM8 20h1v1h-1zM10 20h1v1h-1zM22 20h1v1h-1zM24 20h1v1h-1zM26 20h1v1h-1zM28 20h1v1h-1zM7 21h1v1h-1zM9 21h1v1h-1zM11 21h1v1h-1zM21 21h1v1h-1zM23 21h1v1h-1zM25 21h1v1h-1zM4 22h1v1h-1zM6 22h1v1h-1zM8 22h1v1h-1zM10 22h1v1h-1zM12 22h1v1h-1zM20 22h1v1h-1zM22 22h1v1h-1zM24 22h1v1h-1zM26 22h1v1h-1zM28 22h1v1h-1zM9 23h1v1h-1zM11 23h1v1h-1zM13 23h1v1h-1zM15 23h1v1h-1zM17 23h1v1h-1zM19 23h1v1h-1zM21 23h1v1h-1zM23 23h1v1h-1zM4 24h1v1h-1zM6 24h1v1h-1zM8 24h1v1h-1zM10 24h1v1h-1zM12 24h1v1h-1zM14 24h1v1h-1zM16 24h1v1h-1zM18 24h1v1h-1zM20 24h1v1h-1zM22 24h1v1h-1zM24 24h1v1h-1zM26 24h1v1h-1zM11 25h1v1h-1zM13 25h1v1h-1zM15 25h1v1h-1zM17 25h1v1h-1zM19 25h1v1h-1zM21 25h1v1h-1zM6 26h1v1h-1zM8 26h1v1h-1zM10 26h1v1h-1zM12 26h1v1h-1zM14 26h1v1h-1zM16 26h1v1h-1zM18 26h1v1h-1zM20 26h1v1h-1zM22 26h1v1h-1zM24 26h1v1h-1zM8 28h1v1h-1zM10 28h1v1h-1zM12 28h1v1h-1zM14 28h1v1h-1zM16 28h1v1h-1zM18 28h1v1h-1zM20 28h1v1h-1zM22 28h1v1h-1zM14 30h1v1h-1zM16 30h1v1h-1zM18 30h1v1h-1z'/%3E%3C/svg%3E") right 9% bottom 80px / 64px 64px no-repeat fixed, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128' shape-rendering='crispEdges'%3E%3Cpath fill='%23ece3c4' d='M54 9h1v1h-1zM101 12h1v1h-1zM93 14h1v1h-1zM16 15h1v1h-1zM108 15h1v1h-1zM107 17h1v1h-1zM62 20h1v1h-1zM61 23h1v1h-1zM18 24h1v1h-1zM95 24h1v1h-1zM36 30h1v1h-1zM11 34h1v1h-1zM82 38h1v1h-1zM75 39h1v1h-1zM74 40h3v1h-3zM75 41h1v1h-1zM114 44h1v1h-1zM113 45h3v1h-3zM63 46h1v1h-1zM78 46h1v1h-1zM114 46h1v1h-1zM26 48h1v1h-1zM12 56h1v1h-1zM31 57h1v1h-1zM69 64h1v1h-1zM68 65h3v1h-3zM69 66h1v1h-1zM92 76h1v1h-1zM109 80h1v1h-1zM15 101h1v1h-1zM74 107h1v1h-1zM22 111h1v1h-1zM119 116h1v1h-1zM52 127h1v1h-1z'/%3E%3C/svg%3E") 0 0 / 256px 256px repeat fixed, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2' viewBox='0 0 2 2' shape-rendering='crispEdges'%3E%3Cpath fill='%230b1230' d='M0 0h1v1h-1zM1 1h1v1h-1z'/%3E%3C/svg%3E") 0 calc(38vh - 4px) / 4px 4px repeat-x fixed, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2' viewBox='0 0 2 2' shape-rendering='crispEdges'%3E%3Cpath fill='%23101a3f' d='M0 0h1v1h-1zM1 1h1v1h-1z'/%3E%3C/svg%3E") 0 calc(58vh - 4px) / 4px 4px repeat-x fixed, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2' viewBox='0 0 2 2' shape-rendering='crispEdges'%3E%3Cpath fill='%2316234f' d='M0 0h1v1h-1zM1 1h1v1h-1z'/%3E%3C/svg%3E") 0 calc(76vh - 4px) / 4px 4px repeat-x fixed, linear-gradient(to bottom, #070b1f 0 38vh, #0b1230 38vh 58vh, #101a3f 58vh 76vh, #16234f 76vh) fixed
+
+  # Cards as windows. Without card-mod: a 3px frame and a 1px inner line (plain box-shadow, also frames badges).
+  # With card-mod the stepped frame (overworld-frame-image) replaces both.
+  card-background-color: "#131b3e"
+  ha-card-background: "#131b3e"
+  ha-card-border-color: "var(--overworld-line)"
+  ha-card-border-width: "3px"
+  ha-card-border-radius: "0px"
+  ha-card-box-shadow: "inset 0 0 0 2px var(--overworld-window), inset 0 0 0 3px var(--overworld-line)"
+  ha-badge-border-radius: "0px"
+  ha-card-header-font-family: "var(--ha-font-family-heading)"
+  ha-card-header-font-size: "16px"
+
+  # No round corners anywhere: pixels are square
+  ha-border-radius-sm: "0px"
+  ha-border-radius-md: "0px"
+  ha-border-radius-lg: "0px"
+  ha-border-radius-xl: "0px"
+  ha-border-radius-2xl: "0px"
+  ha-border-radius-3xl: "0px"
+  ha-border-radius-4xl: "0px"
+  ha-border-radius-5xl: "0px"
+  ha-border-radius-6xl: "0px"
+  ha-border-radius-pill: "0px"
+  ha-border-radius-circle: "0px"
+  ha-tile-icon-border-radius: "0px"
+  ha-picture-border-radius: "0px"
+  ha-card-features-border-radius: "0px"
+  control-slider-border-radius: "0px"
+  wa-border-radius-s: "0px"
+  wa-border-radius-m: "0px"
+  wa-border-radius-l: "0px"
+  wa-border-radius-pill: "0px"
+  wa-form-control-border-radius: "0px"
+  wa-panel-border-radius: "0px"
+  # Hard pixel shadows instead of soft blur
+  ha-box-shadow-s: "2px 2px 0 rgba(0,0,0,.45)"
+  ha-box-shadow-m: "3px 3px 0 rgba(0,0,0,.45)"
+  ha-box-shadow-l: "4px 4px 0 rgba(0,0,0,.45)"
+  wa-shadow-s: "2px 2px 0 rgba(0,0,0,.45)"
+  wa-shadow-m: "3px 3px 0 rgba(0,0,0,.45)"
+  wa-shadow-l: "4px 4px 0 rgba(0,0,0,.45)"
+
+  # Dialogs: the same window frame, drawn outside the surface
+  ha-dialog-border-radius: "0px"
+  ha-dialog-surface-background: "#18224a"
+  mdc-theme-surface: "#18224a"
+  dialog-box-shadow: "0 0 0 3px var(--overworld-line), 0 0 0 6px var(--overworld-page), 6px 6px 0 6px rgba(0,0,0,.5)"
+  ha-dialog-scrim-backdrop-filter: "none"
+  mdc-dialog-scrim-color: "rgba(4,8,24,.72)"
+
+  # Header and sidebar
+  app-header-background-color: "#0b1230"
+  app-header-text-color: "#f1ecdc"
+  app-header-border-bottom: "3px solid var(--overworld-line)"
+  sidebar-background-color: "#0b1230"
+  sidebar-text-color: "#f1ecdc"
+  sidebar-icon-color: "#aab3d8"
+  sidebar-selected-text-color: "#f1ecdc"
+  sidebar-selected-icon-color: "#5aaeff"
+  sidebar-menu-button-text-color: "#f1ecdc"
+  scrollbar-thumb-color: "#384270"
+
+  # Inputs and forms
+  input-fill-color: "#0e1534"
+  input-ink-color: "var(--primary-text-color)"
+  input-label-ink-color: "var(--secondary-text-color)"
+  input-idle-line-color: "#6f79a8"
+  input-hover-line-color: "var(--primary-color)"
+  input-outlined-idle-border-color: "#6f79a8"
+  input-outlined-hover-border-color: "var(--primary-color)"
+  mdc-text-field-fill-color: "#0e1534"
+  mdc-select-fill-color: "#0e1534"
+  ha-color-form-background: "#0e1534"
+  code-editor-background-color: "#0e1534"
+  markdown-code-background-color: "#0e1534"
+  clear-background-color: "#18224a"
+  switch-checked-button-color: "var(--primary-color)"
+  switch-checked-track-color: "var(--primary-color)"
+  switch-unchecked-button-color: "#aab3d8"
+  switch-unchecked-track-color: "#384270"
+
+  # Typography: the pixel font of the Overworld Pixels module first, the system monospace as fallback
+  ha-font-family-body: "'Overworld Pixel', ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, 'DejaVu Sans Mono', 'Liberation Mono', monospace"
+  ha-font-family-heading: "'Overworld Pixel', ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, 'DejaVu Sans Mono', 'Liberation Mono', monospace"
+  ha-font-family-longform: "'Overworld Pixel', ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, 'DejaVu Sans Mono', 'Liberation Mono', monospace"
+  ha-font-family-code: "ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace"
+  code-font-family: "ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace"
+  ha-font-weight-medium: "400"
+  ha-font-weight-bold: "700"
+  ha-heading-card-title-font-weight: "400"
+  ha-section-grid-row-height: "64px"
+  ha-font-weight-normal: "400"
+  ha-font-smoothing: "none"
+  # A pixel font only looks right at whole multiples of its grid: 16px (art pixel 2px) for all text and titles,
+  # 24/48/64px for big numbers. No font smoothing, so the pixels stay hard.
+  ha-font-size-xs: "16px"
+  ha-font-size-s: "16px"
+  ha-font-size-m: "16px"
+  ha-font-size-l: "16px"
+  ha-font-size-xl: "16px"
+  ha-font-size-2xl: "24px"
+  ha-font-size-3xl: "24px"
+  ha-font-size-4xl: "48px"
+  ha-font-size-5xl: "64px"
+  ha-line-height-condensed: "1.25"
+  ha-line-height-normal: "1.5"
+  # Windows need a little air between their frames
+  ha-section-grid-row-gap: "12px"
+  ha-section-grid-column-gap: "12px"
+
+  # A small palette like an old console: lights yellow, safety green, alarms red, media purple
+  success-color: "#63d86a"
+  warning-color: "#ff9a4d"
+  error-color: "#ff6b6b"
+  info-color: "#5aaeff"
+  amber-color: "#ffd447"
+  yellow-color: "#ffd447"
+  orange-color: "#ff9a4d"
+  deep-orange-color: "#ff8a5c"
+  red-color: "#ff6b6b"
+  green-color: "#63d86a"
+  light-green-color: "#9be37a"
+  teal-color: "#4fd6cf"
+  cyan-color: "#4fd6cf"
+  blue-color: "#5aaeff"
+  light-blue-color: "#86c2ff"
+  indigo-color: "#8d8cff"
+  purple-color: "#b593ff"
+  deep-purple-color: "#b593ff"
+  pink-color: "#ff8ad1"
+  grey-color: "#8a93bd"
+  state-icon-color: "#aab3d8"
+  state-inactive-color: "#8a93bd"
+  # Twelve-colour palette for states: covers green like an open window, media purple, fans and vacuums teal
+  state-cover-active-color: "var(--light-green-color)"
+  state-media_player-active-color: "var(--purple-color)"
+  state-climate-heat-color: "var(--orange-color)"
+  state-climate-heat-cool-color: "var(--amber-color)"
+  state-weather-cloudy-color: "var(--grey-color)"
+  state-weather-partlycloudy-color: "var(--grey-color)"
+  state-weather-lightning_rainy-color: "var(--amber-color)"
+  state-weather-snowy-color: "var(--light-blue-color)"
+  # Weather icons in the palette: yellow sun, cream clouds over blue-grey, blue rain
+  weather-icon-sun-color: "#ffd447"
+  weather-icon-moon-color: "#ece3c4"
+  weather-icon-cloud-front-color: "#ece3c4"
+  weather-icon-cloud-back-color: "#8a93bd"
+  weather-icon-rain-color: "#5aaeff"
+  weather-icon-snow-color: "#f1ecdc"
+
+  # Optional, card-mod 4.x. Stepped window frames with a pixel shadow. Tiles of switchable entities that are on get
+  # a dithered fill and a pixel cursor in front of the icon.
+  # The domain list matters: the tile card marks any entity with a value as active, sensors included.
+  # Tiles with the class overworld-blocks (card_mod: class: overworld-blocks) get their first feature row, a slider,
+  # cut into ten blocks. Opt-in, because the same mask would cut button rows apart.
+  card-mod-card: |
+    ha-card {
+      border-width: 6px;
+      border-style: solid;
+      border-image: var(--overworld-frame-image) 3 / 6px / 0 stretch;
+      image-rendering: pixelated;
+      background-clip: padding-box;
+      box-shadow: none;
+      filter: var(--overworld-shadow);
+    }
+    ha-card.active:has(ha-tile-icon:is([data-domain=light], [data-domain=switch], [data-domain=fan], [data-domain=media_player], [data-domain=climate], [data-domain=cover], [data-domain=vacuum])) {
+      background-image: conic-gradient(var(--overworld-dither) 25%, transparent 0 50%, var(--overworld-dither) 0 75%, transparent 0);
+      background-size: 4px 4px;
+    }
+    .card-header, .content.title {
+      text-transform: uppercase;
+      font-family: var(--ha-font-family-heading);
+      font-weight: 400;
+      letter-spacing: .06em;
+    }
+    ha-card:has(ha-tile-container[focused]) {
+      outline: 2px solid var(--primary-color);
+      outline-offset: -8px;
+    }
+    ha-tile-icon { margin-inline-start: 10px; }
+    hui-card-features { --feature-button-spacing: 8px; }
+    :host(hui-thermostat-card) .title { text-transform: uppercase; letter-spacing: .06em; }
+    .temp-attribute { flex-shrink: 0; }
+    .temp-attribute .temp { margin-right: 1.2em !important; }
+    ha-card.active ha-tile-icon:is([data-domain=light], [data-domain=switch], [data-domain=fan], [data-domain=media_player], [data-domain=climate], [data-domain=input_boolean], [data-domain=humidifier], [data-domain=water_heater], [data-domain=vacuum], [data-domain=remote], [data-domain=siren], [data-domain=automation], [data-domain=script], [data-domain=cover])::before {
+      content: "";
+      position: absolute;
+      inset-inline-start: -12px;
+      top: calc(50% - 7px);
+      width: 2px;
+      height: 2px;
+      background: var(--overworld-cursor);
+      box-shadow: 0px 2px 0 var(--overworld-cursor), 2px 2px 0 var(--overworld-cursor), 0px 4px 0 var(--overworld-cursor), 2px 4px 0 var(--overworld-cursor), 4px 4px 0 var(--overworld-cursor), 0px 6px 0 var(--overworld-cursor), 2px 6px 0 var(--overworld-cursor), 4px 6px 0 var(--overworld-cursor), 6px 6px 0 var(--overworld-cursor), 0px 8px 0 var(--overworld-cursor), 2px 8px 0 var(--overworld-cursor), 4px 8px 0 var(--overworld-cursor), 0px 10px 0 var(--overworld-cursor), 2px 10px 0 var(--overworld-cursor), 0px 12px 0 var(--overworld-cursor);
+    }
+    :host(.overworld-blocks) hui-card-features {
+      -webkit-mask: repeating-linear-gradient(90deg, #000 0 calc(10% - 4px), transparent calc(10% - 4px) 10%) 0 0 / 100% var(--feature-height) no-repeat content-box, linear-gradient(transparent var(--feature-height), #000 var(--feature-height)) border-box;
+      mask: repeating-linear-gradient(90deg, #000 0 calc(10% - 4px), transparent calc(10% - 4px) 10%) 0 0 / 100% var(--feature-height) no-repeat content-box, linear-gradient(transparent var(--feature-height), #000 var(--feature-height)) border-box;
+      background: linear-gradient(var(--input-idle-line-color), var(--input-idle-line-color)) 0 0 / 100% var(--feature-height) no-repeat content-box;
+    }
+  # Optional, card-mod 4.x: the more-info dialog uses the theme font too
+  card-mod-more-info: |
+    :host { font-family: var(--ha-font-family-body); }
+  # Optional, card-mod 4.x: the sidebar becomes the menu window with a cursor on the selected entry
+  card-mod-sidebar: |
+    :host {
+      border-inline-end: 3px solid var(--overworld-line);
+      font-family: var(--ha-font-family-body);
+    }
+    ha-list-item-button.selected::after {
+      content: "";
+      position: absolute;
+      inset-inline-start: 4px;
+      top: calc(50% - 7px);
+      width: 2px;
+      height: 2px;
+      background: var(--overworld-cursor);
+      box-shadow: 0px 2px 0 var(--overworld-cursor), 2px 2px 0 var(--overworld-cursor), 0px 4px 0 var(--overworld-cursor), 2px 4px 0 var(--overworld-cursor), 4px 4px 0 var(--overworld-cursor), 0px 6px 0 var(--overworld-cursor), 2px 6px 0 var(--overworld-cursor), 4px 6px 0 var(--overworld-cursor), 6px 6px 0 var(--overworld-cursor), 0px 8px 0 var(--overworld-cursor), 2px 8px 0 var(--overworld-cursor), 4px 8px 0 var(--overworld-cursor), 0px 10px 0 var(--overworld-cursor), 2px 10px 0 var(--overworld-cursor), 0px 12px 0 var(--overworld-cursor);
+    }
+
+  modes:
+    dark: {}
+    light:
+      overworld-frame-image: >-
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='7' viewBox='0 0 7 7' shape-rendering='crispEdges'%3E%3Cpath fill='%231a2350' d='M2 0h3v1h-3zM1 1h1v1h-1zM5 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM1 5h1v1h-1zM5 5h1v1h-1zM2 6h3v1h-3z'/%3E%3Cpath fill='%23cfe0f7' d='M2 1h3v1h-3zM1 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM5 3h1v1h-1zM1 4h1v1h-1zM5 4h1v1h-1zM2 5h3v1h-3z'/%3E%3C/svg%3E")
+      overworld-shadow: "drop-shadow(3px 3px 0 rgba(26,35,80,.35))"
+      overworld-dither: "rgba(166,107,0,.16)"
+      overworld-line: "#1a2350"
+      overworld-window: "#fbfcff"
+      card-background-color: "#fbfcff"
+      ha-card-background: "#fbfcff"
+      overworld-page: "#cfe0f7"
+      overworld-cursor: "#131a3b"
+      primary-color: "#1d5bd6"
+      accent-color: "#1d5bd6"
+      text-primary-color: "#ffffff"
+      text-accent-color: "#ffffff"
+      primary-text-color: "#131a3b"
+      secondary-text-color: "#4a5480"
+      disabled-text-color: "#7d86ac"
+      disabled-color: "#a4accc"
+      divider-color: "#c7cee6"
+      primary-background-color: "#e7edf8"
+      secondary-background-color: "#dde5f3"
+      # Daylight: sun with a dithered halo, pixel clouds, green hills, four bands of sky
+      lovelace-background: >-
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='48' viewBox='0 0 160 48' shape-rendering='crispEdges'%3E%3Cpath fill='%237cc46a' d='M55 9h1v1h-1zM57 9h1v1h-1zM59 9h1v1h-1zM54 10h1v1h-1zM56 10h1v1h-1zM58 10h1v1h-1zM60 10h1v1h-1zM53 11h1v1h-1zM55 11h5v1h-5zM61 11h1v1h-1zM63 11h1v1h-1zM147 11h1v1h-1zM149 11h1v1h-1zM151 11h1v1h-1zM50 12h1v1h-1zM52 12h11v1h-11zM64 12h1v1h-1zM144 12h1v1h-1zM146 12h1v1h-1zM148 12h1v1h-1zM150 12h1v1h-1zM152 12h1v1h-1zM154 12h1v1h-1zM49 13h1v1h-1zM51 13h13v1h-13zM65 13h1v1h-1zM141 13h1v1h-1zM143 13h1v1h-1zM145 13h9v1h-9zM155 13h1v1h-1zM48 14h1v1h-1zM50 14h15v1h-15zM66 14h1v1h-1zM122 14h1v1h-1zM124 14h1v1h-1zM126 14h1v1h-1zM128 14h1v1h-1zM140 14h1v1h-1zM142 14h13v1h-13zM156 14h1v1h-1zM47 15h1v1h-1zM49 15h17v1h-17zM67 15h1v1h-1zM119 15h1v1h-1zM121 15h1v1h-1zM123 15h1v1h-1zM125 15h1v1h-1zM127 15h1v1h-1zM129 15h1v1h-1zM131 15h1v1h-1zM133 15h1v1h-1zM135 15h1v1h-1zM137 15h1v1h-1zM139 15h1v1h-1zM141 15h15v1h-15zM157 15h1v1h-1zM46 16h1v1h-1zM48 16h21v1h-21zM70 16h1v1h-1zM118 16h1v1h-1zM120 16h11v1h-11zM132 16h1v1h-1zM134 16h1v1h-1zM136 16h1v1h-1zM138 16h19v1h-19zM158 16h1v1h-1zM45 17h1v1h-1zM47 17h23v1h-23zM71 17h1v1h-1zM83 17h1v1h-1zM117 17h1v1h-1zM119 17h39v1h-39zM159 17h1v1h-1zM0 18h1v1h-1zM44 18h1v1h-1zM46 18h25v1h-25zM72 18h1v1h-1zM74 18h1v1h-1zM76 18h1v1h-1zM78 18h1v1h-1zM80 18h1v1h-1zM82 18h1v1h-1zM84 18h1v1h-1zM86 18h1v1h-1zM88 18h1v1h-1zM116 18h1v1h-1zM118 18h41v1h-41zM1 19h1v1h-1zM43 19h1v1h-1zM45 19h29v1h-29zM75 19h1v1h-1zM77 19h1v1h-1zM79 19h1v1h-1zM81 19h1v1h-1zM83 19h3v1h-3zM87 19h1v1h-1zM89 19h1v1h-1zM115 19h45v1h-45zM0 20h1v1h-1zM2 20h1v1h-1zM24 20h1v1h-1zM26 20h1v1h-1zM28 20h1v1h-1zM42 20h1v1h-1zM44 20h45v1h-45zM90 20h1v1h-1zM92 20h1v1h-1zM114 20h46v1h-46zM0 21h2v1h-2zM3 21h1v1h-1zM21 21h1v1h-1zM23 21h1v1h-1zM25 21h1v1h-1zM27 21h1v1h-1zM29 21h1v1h-1zM31 21h1v1h-1zM33 21h1v1h-1zM39 21h1v1h-1zM41 21h1v1h-1zM43 21h49v1h-49zM93 21h1v1h-1zM113 21h47v1h-47zM0 22h3v1h-3zM4 22h1v1h-1zM20 22h1v1h-1zM22 22h1v1h-1zM24 22h5v1h-5zM30 22h1v1h-1zM32 22h1v1h-1zM34 22h1v1h-1zM36 22h1v1h-1zM38 22h1v1h-1zM40 22h53v1h-53zM94 22h1v1h-1zM112 22h48v1h-48zM0 23h4v1h-4zM5 23h1v1h-1zM17 23h1v1h-1zM19 23h1v1h-1zM21 23h13v1h-13zM35 23h1v1h-1zM37 23h57v1h-57zM95 23h1v1h-1zM111 23h49v1h-49zM0 24h5v1h-5zM6 24h1v1h-1zM8 24h1v1h-1zM14 24h1v1h-1zM16 24h1v1h-1zM18 24h77v1h-77zM96 24h1v1h-1zM110 24h50v1h-50zM0 25h8v1h-8zM9 25h1v1h-1zM11 25h1v1h-1zM13 25h1v1h-1zM15 25h83v1h-83zM99 25h1v1h-1zM107 25h1v1h-1zM109 25h51v1h-51zM0 26h9v1h-9zM10 26h1v1h-1zM12 26h1v1h-1zM14 26h85v1h-85zM100 26h1v1h-1zM102 26h1v1h-1zM104 26h1v1h-1zM106 26h1v1h-1zM108 26h52v1h-52zM0 27h100v1h-100zM101 27h1v1h-1zM103 27h1v1h-1zM105 27h1v1h-1zM107 27h53v1h-53zM0 28h103v1h-103zM104 28h56v1h-56zM0 29h160v1h-160zM0 30h160v1h-160zM0 31h160v1h-160zM0 32h160v1h-160zM0 33h160v1h-160zM0 34h160v1h-160zM0 35h160v1h-160zM0 36h160v1h-160zM0 37h160v1h-160zM0 38h160v1h-160zM0 39h160v1h-160zM0 40h160v1h-160zM0 41h160v1h-160zM0 42h160v1h-160zM0 43h160v1h-160zM0 44h160v1h-160zM0 45h160v1h-160zM0 46h160v1h-160zM0 47h160v1h-160z'/%3E%3Cpath fill='%234f9e48' d='M85 23h1v1h-1zM82 24h1v1h-1zM84 24h1v1h-1zM86 24h1v1h-1zM88 24h1v1h-1zM132 24h1v1h-1zM134 24h1v1h-1zM35 25h1v1h-1zM37 25h1v1h-1zM39 25h1v1h-1zM81 25h1v1h-1zM83 25h5v1h-5zM89 25h1v1h-1zM131 25h1v1h-1zM133 25h1v1h-1zM135 25h1v1h-1zM137 25h1v1h-1zM32 26h1v1h-1zM34 26h1v1h-1zM36 26h1v1h-1zM38 26h1v1h-1zM40 26h1v1h-1zM42 26h1v1h-1zM80 26h1v1h-1zM82 26h9v1h-9zM130 26h1v1h-1zM132 26h5v1h-5zM138 26h1v1h-1zM19 27h1v1h-1zM21 27h1v1h-1zM23 27h1v1h-1zM25 27h1v1h-1zM29 27h1v1h-1zM31 27h1v1h-1zM33 27h1v1h-1zM35 27h7v1h-7zM43 27h1v1h-1zM79 27h1v1h-1zM81 27h11v1h-11zM129 27h9v1h-9zM139 27h1v1h-1zM141 27h1v1h-1zM16 28h1v1h-1zM18 28h1v1h-1zM20 28h1v1h-1zM22 28h1v1h-1zM24 28h1v1h-1zM26 28h1v1h-1zM28 28h1v1h-1zM30 28h1v1h-1zM32 28h11v1h-11zM44 28h1v1h-1zM78 28h1v1h-1zM80 28h13v1h-13zM128 28h13v1h-13zM142 28h1v1h-1zM144 28h1v1h-1zM146 28h1v1h-1zM148 28h1v1h-1zM150 28h1v1h-1zM152 28h1v1h-1zM154 28h1v1h-1zM15 29h1v1h-1zM17 29h9v1h-9zM27 29h1v1h-1zM29 29h15v1h-15zM45 29h1v1h-1zM77 29h1v1h-1zM79 29h15v1h-15zM95 29h1v1h-1zM127 29h15v1h-15zM143 29h1v1h-1zM145 29h1v1h-1zM147 29h1v1h-1zM149 29h1v1h-1zM151 29h1v1h-1zM153 29h1v1h-1zM155 29h1v1h-1zM14 30h1v1h-1zM16 30h29v1h-29zM46 30h1v1h-1zM64 30h1v1h-1zM66 30h1v1h-1zM74 30h1v1h-1zM76 30h19v1h-19zM96 30h1v1h-1zM126 30h29v1h-29zM156 30h1v1h-1zM13 31h1v1h-1zM15 31h31v1h-31zM47 31h1v1h-1zM61 31h1v1h-1zM63 31h1v1h-1zM65 31h1v1h-1zM67 31h1v1h-1zM69 31h1v1h-1zM71 31h1v1h-1zM73 31h1v1h-1zM75 31h21v1h-21zM97 31h1v1h-1zM99 31h1v1h-1zM103 31h1v1h-1zM105 31h1v1h-1zM107 31h1v1h-1zM109 31h1v1h-1zM123 31h1v1h-1zM125 31h33v1h-33zM12 32h1v1h-1zM14 32h33v1h-33zM48 32h1v1h-1zM60 32h1v1h-1zM62 32h1v1h-1zM64 32h5v1h-5zM70 32h1v1h-1zM72 32h25v1h-25zM98 32h1v1h-1zM100 32h1v1h-1zM102 32h1v1h-1zM104 32h1v1h-1zM106 32h1v1h-1zM108 32h1v1h-1zM110 32h1v1h-1zM112 32h1v1h-1zM122 32h1v1h-1zM124 32h35v1h-35zM1 33h1v1h-1zM11 33h1v1h-1zM13 33h35v1h-35zM49 33h1v1h-1zM57 33h1v1h-1zM59 33h1v1h-1zM61 33h39v1h-39zM101 33h11v1h-11zM113 33h1v1h-1zM115 33h1v1h-1zM121 33h1v1h-1zM123 33h37v1h-37zM0 34h1v1h-1zM2 34h1v1h-1zM10 34h39v1h-39zM50 34h1v1h-1zM52 34h1v1h-1zM54 34h1v1h-1zM56 34h1v1h-1zM58 34h55v1h-55zM114 34h1v1h-1zM116 34h1v1h-1zM118 34h1v1h-1zM120 34h1v1h-1zM122 34h38v1h-38zM0 35h2v1h-2zM3 35h1v1h-1zM5 35h1v1h-1zM7 35h1v1h-1zM9 35h43v1h-43zM53 35h1v1h-1zM55 35h1v1h-1zM57 35h59v1h-59zM117 35h1v1h-1zM119 35h41v1h-41zM0 36h3v1h-3zM4 36h1v1h-1zM6 36h1v1h-1zM8 36h152v1h-152zM0 37h160v1h-160zM0 38h160v1h-160zM0 39h160v1h-160zM0 40h160v1h-160zM0 41h160v1h-160zM0 42h160v1h-160zM0 43h160v1h-160zM0 44h160v1h-160zM0 45h160v1h-160zM0 46h160v1h-160zM0 47h160v1h-160z'/%3E%3Cpath fill='%232f6b34' d='M37 19h1v1h-1zM142 19h4v1h-4zM152 19h1v1h-1zM37 20h1v1h-1zM142 20h4v1h-4zM152 20h1v1h-1zM20 21h1v1h-1zM36 21h3v1h-3zM142 21h4v1h-4zM152 21h1v1h-1zM20 22h1v1h-1zM36 22h3v1h-3zM141 22h6v1h-6zM151 22h3v1h-3zM19 23h3v1h-3zM35 23h5v1h-5zM125 23h1v1h-1zM141 23h6v1h-6zM151 23h3v1h-3zM155 23h1v1h-1zM19 24h3v1h-3zM35 24h5v1h-5zM105 24h1v1h-1zM125 24h1v1h-1zM141 24h6v1h-6zM151 24h3v1h-3zM155 24h1v1h-1zM18 25h5v1h-5zM53 25h1v1h-1zM64 25h1v1h-1zM70 25h1v1h-1zM105 25h1v1h-1zM125 25h1v1h-1zM140 25h8v1h-8zM150 25h7v1h-7zM18 26h5v1h-5zM53 26h1v1h-1zM63 26h2v1h-2zM70 26h1v1h-1zM98 26h1v1h-1zM105 26h1v1h-1zM124 26h3v1h-3zM140 26h8v1h-8zM150 26h7v1h-7zM53 27h1v1h-1zM63 27h3v1h-3zM69 27h3v1h-3zM98 27h1v1h-1zM104 27h3v1h-3zM124 27h3v1h-3zM140 27h8v1h-8zM150 27h8v1h-8zM52 28h3v1h-3zM62 28h4v1h-4zM69 28h3v1h-3zM97 28h3v1h-3zM104 28h3v1h-3zM123 28h5v1h-5zM153 28h5v1h-5zM7 29h1v1h-1zM52 29h3v1h-3zM62 29h5v1h-5zM68 29h5v1h-5zM97 29h3v1h-3zM103 29h5v1h-5zM123 29h5v1h-5zM7 30h1v1h-1zM52 30h3v1h-3zM61 30h5v1h-5zM68 30h5v1h-5zM96 30h5v1h-5zM103 30h5v1h-5zM122 30h5v1h-5zM6 31h3v1h-3zM51 31h5v1h-5zM6 32h3v1h-3zM51 32h5v1h-5zM5 33h5v1h-5zM51 33h5v1h-5zM5 34h5v1h-5z'/%3E%3Cpath fill='%23f0e2c0' d='M53 3h12v1h-12zM53 4h12v1h-12zM53 5h12v1h-12zM53 6h12v1h-12zM53 7h12v1h-12zM53 8h12v1h-12zM53 9h12v1h-12zM53 10h12v1h-12zM53 11h12v1h-12z'/%3E%3Cpath fill='%23c8463c' d='M55 -1h8v1h-8zM54 0h10v1h-10zM53 1h12v1h-12zM52 2h14v1h-14z'/%3E%3Cpath fill='%234a5480' d='M55 5h2v1h-2zM58 5h2v1h-2zM62 5h2v1h-2zM55 6h2v1h-2zM58 6h2v1h-2zM62 6h2v1h-2zM126 18h1v1h-1zM66 20h1v1h-1zM77 24h1v1h-1zM93 24h1v1h-1zM9 29h1v1h-1z'/%3E%3C/svg%3E") left bottom / 320px 96px repeat-x fixed, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' shape-rendering='crispEdges'%3E%3Cpath fill='%23ffd447' d='M14 10h4v1h-4zM12 11h8v1h-8zM11 12h10v1h-10zM11 13h10v1h-10zM10 14h12v1h-12zM10 15h12v1h-12zM10 16h12v1h-12zM10 17h12v1h-12zM11 18h10v1h-10zM11 19h10v1h-10zM12 20h8v1h-8zM14 21h4v1h-4z'/%3E%3Cpath fill='%23ffb000' d='M13 9h6v1h-6zM12 10h2v1h-2zM18 10h2v1h-2zM11 11h1v1h-1zM20 11h1v1h-1zM10 12h1v1h-1zM21 12h1v1h-1zM9 13h2v1h-2zM21 13h2v1h-2zM9 14h1v1h-1zM22 14h1v1h-1zM9 15h1v1h-1zM22 15h1v1h-1zM9 16h1v1h-1zM22 16h1v1h-1zM9 17h1v1h-1zM22 17h1v1h-1zM9 18h2v1h-2zM21 18h2v1h-2zM10 19h1v1h-1zM21 19h1v1h-1zM11 20h1v1h-1zM20 20h1v1h-1zM12 21h2v1h-2zM18 21h2v1h-2zM13 22h6v1h-6z'/%3E%3Cpath fill='%23ffe27a' d='M10 2h1v1h-1zM12 2h1v1h-1zM14 2h1v1h-1zM16 2h1v1h-1zM18 2h1v1h-1zM20 2h1v1h-1zM8 4h1v1h-1zM10 4h1v1h-1zM12 4h1v1h-1zM14 4h1v1h-1zM16 4h1v1h-1zM18 4h1v1h-1zM20 4h1v1h-1zM22 4h1v1h-1zM24 4h1v1h-1zM13 5h1v1h-1zM15 5h1v1h-1zM17 5h1v1h-1zM19 5h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM24 6h1v1h-1zM26 6h1v1h-1zM9 7h1v1h-1zM11 7h1v1h-1zM13 7h1v1h-1zM15 7h1v1h-1zM17 7h1v1h-1zM19 7h1v1h-1zM21 7h1v1h-1zM4 8h1v1h-1zM6 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM12 8h1v1h-1zM14 8h1v1h-1zM16 8h1v1h-1zM18 8h1v1h-1zM20 8h1v1h-1zM22 8h1v1h-1zM24 8h1v1h-1zM26 8h1v1h-1zM28 8h1v1h-1zM7 9h1v1h-1zM9 9h1v1h-1zM11 9h1v1h-1zM19 9h1v1h-1zM21 9h1v1h-1zM23 9h1v1h-1zM2 10h1v1h-1zM4 10h1v1h-1zM6 10h1v1h-1zM8 10h1v1h-1zM10 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM26 10h1v1h-1zM28 10h1v1h-1zM7 11h1v1h-1zM9 11h1v1h-1zM21 11h1v1h-1zM23 11h1v1h-1zM25 11h1v1h-1zM2 12h1v1h-1zM4 12h1v1h-1zM6 12h1v1h-1zM8 12h1v1h-1zM22 12h1v1h-1zM24 12h1v1h-1zM26 12h1v1h-1zM28 12h1v1h-1zM5 13h1v1h-1zM7 13h1v1h-1zM23 13h1v1h-1zM25 13h1v1h-1zM2 14h1v1h-1zM4 14h1v1h-1zM6 14h1v1h-1zM8 14h1v1h-1zM24 14h1v1h-1zM26 14h1v1h-1zM28 14h1v1h-1zM30 14h1v1h-1zM5 15h1v1h-1zM7 15h1v1h-1zM23 15h1v1h-1zM25 15h1v1h-1zM2 16h1v1h-1zM4 16h1v1h-1zM6 16h1v1h-1zM8 16h1v1h-1zM24 16h1v1h-1zM26 16h1v1h-1zM28 16h1v1h-1zM30 16h1v1h-1zM5 17h1v1h-1zM7 17h1v1h-1zM23 17h1v1h-1zM25 17h1v1h-1zM2 18h1v1h-1zM4 18h1v1h-1zM6 18h1v1h-1zM8 18h1v1h-1zM24 18h1v1h-1zM26 18h1v1h-1zM28 18h1v1h-1zM30 18h1v1h-1zM5 19h1v1h-1zM7 19h1v1h-1zM9 19h1v1h-1zM23 19h1v1h-1zM25 19h1v1h-1zM2 20h1v1h-1zM4 20h1v1h-1zM6 20h1v1h-1zM8 20h1v1h-1zM10 20h1v1h-1zM22 20h1v1h-1zM24 20h1v1h-1zM26 20h1v1h-1zM28 20h1v1h-1zM7 21h1v1h-1zM9 21h1v1h-1zM11 21h1v1h-1zM21 21h1v1h-1zM23 21h1v1h-1zM25 21h1v1h-1zM4 22h1v1h-1zM6 22h1v1h-1zM8 22h1v1h-1zM10 22h1v1h-1zM12 22h1v1h-1zM20 22h1v1h-1zM22 22h1v1h-1zM24 22h1v1h-1zM26 22h1v1h-1zM28 22h1v1h-1zM9 23h1v1h-1zM11 23h1v1h-1zM13 23h1v1h-1zM15 23h1v1h-1zM17 23h1v1h-1zM19 23h1v1h-1zM21 23h1v1h-1zM23 23h1v1h-1zM4 24h1v1h-1zM6 24h1v1h-1zM8 24h1v1h-1zM10 24h1v1h-1zM12 24h1v1h-1zM14 24h1v1h-1zM16 24h1v1h-1zM18 24h1v1h-1zM20 24h1v1h-1zM22 24h1v1h-1zM24 24h1v1h-1zM26 24h1v1h-1zM11 25h1v1h-1zM13 25h1v1h-1zM15 25h1v1h-1zM17 25h1v1h-1zM19 25h1v1h-1zM21 25h1v1h-1zM6 26h1v1h-1zM8 26h1v1h-1zM10 26h1v1h-1zM12 26h1v1h-1zM14 26h1v1h-1zM16 26h1v1h-1zM18 26h1v1h-1zM20 26h1v1h-1zM22 26h1v1h-1zM24 26h1v1h-1zM8 28h1v1h-1zM10 28h1v1h-1zM12 28h1v1h-1zM14 28h1v1h-1zM16 28h1v1h-1zM18 28h1v1h-1zM20 28h1v1h-1zM22 28h1v1h-1zM14 30h1v1h-1zM16 30h1v1h-1zM18 30h1v1h-1z'/%3E%3C/svg%3E") right 9% bottom 80px / 64px 64px no-repeat fixed, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='90' viewBox='0 0 200 90' shape-rendering='crispEdges'%3E%3Cpath fill='%23ffffff' d='M158 18h16v1h-16zM152 19h34v1h-34zM146 20h48v1h-48zM105 35h8v1h-8zM102 36h17v1h-17zM99 37h24v1h-24zM26 49h8v1h-8zM23 50h17v1h-17zM20 51h24v1h-24z'/%3E%3Cpath fill='%23d6e6f7' d='M146 21h48v1h-48zM99 38h24v1h-24zM20 52h24v1h-24z'/%3E%3C/svg%3E") 0 0 / 400px 180px repeat fixed, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2' viewBox='0 0 2 2' shape-rendering='crispEdges'%3E%3Cpath fill='%23a6d2ff' d='M0 0h1v1h-1zM1 1h1v1h-1z'/%3E%3C/svg%3E") 0 calc(38vh - 4px) / 4px 4px repeat-x fixed, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2' viewBox='0 0 2 2' shape-rendering='crispEdges'%3E%3Cpath fill='%23bfe0ff' d='M0 0h1v1h-1zM1 1h1v1h-1z'/%3E%3C/svg%3E") 0 calc(58vh - 4px) / 4px 4px repeat-x fixed, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2' viewBox='0 0 2 2' shape-rendering='crispEdges'%3E%3Cpath fill='%23d8ecff' d='M0 0h1v1h-1zM1 1h1v1h-1z'/%3E%3C/svg%3E") 0 calc(76vh - 4px) / 4px 4px repeat-x fixed, linear-gradient(to bottom, #8ec5ff 0 38vh, #a6d2ff 38vh 58vh, #bfe0ff 58vh 76vh, #d8ecff 76vh) fixed
+      ha-dialog-surface-background: "#fbfcff"
+      mdc-theme-surface: "#fbfcff"
+      mdc-dialog-scrim-color: "rgba(19,26,59,.45)"
+      dialog-box-shadow: "0 0 0 3px var(--overworld-line), 0 0 0 6px var(--overworld-window), 6px 6px 0 6px rgba(19,26,59,.25)"
+      ha-box-shadow-s: "2px 2px 0 rgba(19,26,59,.25)"
+      ha-box-shadow-m: "3px 3px 0 rgba(19,26,59,.25)"
+      ha-box-shadow-l: "4px 4px 0 rgba(19,26,59,.25)"
+      wa-shadow-s: "2px 2px 0 rgba(19,26,59,.25)"
+      wa-shadow-m: "3px 3px 0 rgba(19,26,59,.25)"
+      wa-shadow-l: "4px 4px 0 rgba(19,26,59,.25)"
+      app-header-background-color: "#fbfcff"
+      app-header-text-color: "#131a3b"
+      sidebar-background-color: "#fbfcff"
+      sidebar-text-color: "#131a3b"
+      sidebar-icon-color: "#4a5480"
+      sidebar-selected-text-color: "#131a3b"
+      sidebar-selected-icon-color: "#1d5bd6"
+      sidebar-menu-button-text-color: "#131a3b"
+      scrollbar-thumb-color: "#a4accc"
+      input-fill-color: "#eef2fa"
+      input-idle-line-color: "#7d86ac"
+      input-outlined-idle-border-color: "#7d86ac"
+      mdc-text-field-fill-color: "#eef2fa"
+      mdc-select-fill-color: "#eef2fa"
+      ha-color-form-background: "#eef2fa"
+      code-editor-background-color: "#eef2fa"
+      markdown-code-background-color: "#eef2fa"
+      clear-background-color: "#fbfcff"
+      switch-unchecked-button-color: "#4a5480"
+      switch-unchecked-track-color: "#c7cee6"
+      success-color: "#1e8538"
+      warning-color: "#b95100"
+      error-color: "#c62832"
+      info-color: "#1d5bd6"
+      amber-color: "#a66b00"
+      yellow-color: "#a66b00"
+      orange-color: "#b95100"
+      deep-orange-color: "#b8461c"
+      red-color: "#c62832"
+      green-color: "#1e8538"
+      light-green-color: "#3f7f1f"
+      teal-color: "#0b7d85"
+      cyan-color: "#0b7d85"
+      blue-color: "#1d5bd6"
+      light-blue-color: "#2a6fb8"
+      indigo-color: "#4b4bc9"
+      purple-color: "#7446d4"
+      deep-purple-color: "#7446d4"
+      pink-color: "#b42a83"
+      grey-color: "#6b7499"
+      state-icon-color: "#4a5480"
+      state-inactive-color: "#6b7499"
+      weather-icon-sun-color: "#b88300"
+      weather-icon-moon-color: "#4a5480"
+      weather-icon-cloud-front-color: "#c7cee6"
+      weather-icon-cloud-back-color: "#7d86ac"
+      weather-icon-rain-color: "#1d5bd6"
+      weather-icon-snow-color: "#7d86ac"
